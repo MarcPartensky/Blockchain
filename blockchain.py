@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Block chain according to me."""
 
 import hashlib
 from time import time
@@ -10,6 +11,7 @@ DIFFICULTY = 4
 
 
 class Block:
+    """Block according to me."""
     def __init__(self, index, timestamp, transactions, previous_hash, proof):
         self.index = index
         self.timestamp = timestamp
@@ -19,6 +21,7 @@ class Block:
         self.hash = self.hash()
 
     def hash(self):
+        """Hash a block using sha256."""
         data = self.__dict__
         data["transactions"] = [t.__dict__ for t in self.transactions]
         block_string = json.dumps(data, sort_keys=True).encode()
@@ -29,16 +32,19 @@ class Block:
 
 
 class Transaction:
+    """Transaction of Samy coin."""
     def __init__(self, sender, recipient, amount):
         self.sender = sender
         self.recipient = recipient
         self.amount = amount
 
     def __str__(self):
+        """String representation of a transaction."""
         return f"FROM: {self.sender} TO: {self.recipient} AMOUNT: {self.amount}"
 
 
 class Blockchain:
+    """Blockchain"""
     def __init__(self):
         self.blocks = []
         self.blocks.append(self.create_first_block())
